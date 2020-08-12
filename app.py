@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, date
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -31,8 +31,10 @@ def index():
         except:
             return 'Une erreur inattendue !'
     else:
+        today = date.today()
+        today_is = today.strftime("%B %d, %Y")
         tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        return render_template('index.html', tasks=tasks, today_is=today_is)
 
 
 @app.route('/delete/<int:id>')
