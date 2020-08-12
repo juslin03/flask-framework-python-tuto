@@ -1,13 +1,15 @@
 {% extends './base.html' %}
-{% block head %} <title>Mise a jour</title> {% endblock head %}
+{% block head %} <title>Mise à jour</title> {% endblock head %}
 
 {% block body %}
 <div class="content" style='display: flex; align-items: center; flex-direction: column;'>
-    <h1>Modification de la tache</h1>
-
+    <h1>Modification de la Tâche n°{{task_to_update.id}}</h1>
     <form class="form" action="/update/{{ task_to_update.id }}" method="post">
-        <input type='text' name='content' id='content' value="{{task_to_update.content}}" />
-        <input type='submit' value = 'appliquer la modification' />
+        <div class="mb-3 flex">
+            <label for="content" class="form-label">Tâche à modifier</label>
+            <input type="text" class="form-control" name='content' id='content' value="{{task_to_update.content}}" aria-describedby="emailHelp" required placeholder="Modifier votre tâche">
+        </div>
+          <button type="submit" class="btn btn-success">Appliquer la modification</button>
     </form>
 </div>
 {% endblock body %}
