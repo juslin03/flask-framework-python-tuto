@@ -1,0 +1,36 @@
+{% extends './base.html' %}
+{% block head %} <title>Index</title> {% endblock head %} {% block
+body %}
+<div class="content" style='display: flex; align-items: center; flex-direction: column;'>
+    <h1>Task Master</h1>
+   
+   {% if tasks|length < 1 %}
+   <p>Aucune tache disponible. Vous pouvez en creer ci-dessous</p>
+    {% else %}
+   <table>
+    <tr>
+        <th>Tache</th>
+        <th>Ajoutée le</th>
+        <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.content}}</td>
+        <td>{{ task.date_created.date() }}</td>
+        <td>
+            <a href='/delete/{{ task.id }}'>Supprimer</a>
+            <br />
+            <a href='/update/{{ task.id }}'>Modifier</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+   {% endif %}
+       
+
+    <form class="form" action="/" method="post">
+        <input type='text' name='content' id='content' />
+        <input type='submit' value = 'Ajouter la tache' />
+    </form>
+</div>
+{% endblock body %}
